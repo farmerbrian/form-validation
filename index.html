@@ -13,8 +13,36 @@
         <p>
           <label for="mail">
             <span>Please enter an email address:</span>
-            <input type="email" id="mail" name="mail" required minlength="8" />
-            <span class="error" aria-live="polite"></span>
+            <input type="email" id="mail" name="mail" required minlength="8" data-error-text="You need to enter an e-mail address. FOOL!" />
+            <span id="mail-span" class="error" aria-live="polite"></span>
+          </label>
+        </p>
+        <p>
+          <label for="country">
+            <span>Please enter a country:</span>
+            <input type="text" id="country" name="country" required minlength="2" />
+            <span id="country-span" class="error" aria-live="polite"></span>
+          </label>
+        </p>
+        <p>
+          <label for="zip">
+            <span>Please enter an zip code:</span>
+            <input type="text" id="zip" name="zip" required minlength="5" />
+            <span id="zip-span" class="error" aria-live="polite"></span>
+          </label>
+        </p>
+        <p>
+          <label for="password">
+            <span>Please enter a password:</span>
+            <input type="password" id="password" name="password" required minlength="8" />
+            <span id="password-span" class="error" aria-live="polite"></span>
+          </label>
+        </p>
+        <p>
+          <label for="password2">
+            <span>Please confirm your password:</span>
+            <input type="password" id="password2" name="password2" required minlength="8" />
+            <span id="password2-span" class="error" aria-live="polite"></span>
           </label>
         </p>
         <button>Submit</button>
