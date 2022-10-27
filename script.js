@@ -1,38 +1,62 @@
 const form = document.querySelector('form');
-const email = document.getElementById('mail');
-const country = document.getElementById('country');
-const zip = document.getElementById('zip');
-const password = document.getElementById('password');
-const password2 = document.getElementById('password2');
 
-const emailError = document.getElementById('mail-span');
-const countryError = document.getElementById('country-span');
-const zipError = document.getElementById('zip-span');
-const passwordError = document.getElementById('password-span');
-const password2Error = document.getElementById('password2-span');
+const email = {
+	name: 'mail',
+	id: document.getElementById(`mail`),
+	errorSpan: document.getElementById(`mail-span`),
+	errorText: 'Please enter an e-mail address Fool.',
+};
 
-function inputError(input, error) {
-	input.addEventListener('input', (event) => {
+const country = {
+	name: 'country',
+	id: document.getElementById(`country`),
+	errorSpan: document.getElementById(`country-span`),
+	errorText: 'Please enter the name of a country.',
+};
+
+const zip = {
+	name: 'mail',
+	id: document.getElementById(`zip`),
+	errorSpan: document.getElementById(`zip-span`),
+	errorText: 'Please enter a zip code.',
+};
+
+const password = {
+	name: 'password',
+	id: document.getElementById(`password`),
+	errorSpan: document.getElementById(`password-span`),
+	errorText: 'Please enter a password.',
+};
+
+const password2 = {
+	name: 'password2',
+	id: document.getElementById(`password2`),
+	errorSpan: document.getElementById(`password2-span`),
+	errorText: 'Please confirm your password.',
+};
+
+function inputError(input) {
+	input.id.addEventListener('input', (event) => {
 		// Each time the user types something, we check if the
 		// form fields are valid.
 
-		if (input.validity.valid) {
+		if (input.id.validity.valid) {
 			// In case there is an error message visible, if the field
 			// is valid, we remove the error message.
-			error.textContent = ''; // Reset the content of the message
-			error.className = 'error'; // Reset the visual state of the message
+			input.errorSpan.textContent = ''; // Reset the content of the message
+			input.errorSpan.className = 'error'; // Reset the visual state of the message
 		} else {
 			// If there is still an error, show the correct error
-			showError(input, error);
+			showError(input);
 		}
 	});
 }
 
-inputError(email, emailError);
-inputError(country, countryError);
-inputError(zip, zipError);
-inputError(password, passwordError);
-inputError(password2, password2Error);
+inputError(email);
+inputError(country);
+inputError(zip);
+inputError(password);
+inputError(password2);
 
 form.addEventListener('submit', (event) => {
 	// if the email field is valid, we let the form submit
@@ -44,22 +68,21 @@ form.addEventListener('submit', (event) => {
 	}
 });
 
-function showError(input, error) {
-	if (input.validity.valueMissing) {
+function showError(input) {
+	if (input.id.validity.valueMissing) {
 		// If the field is empty,
 		// display the following error message.
-		error.textContent = 'You need to enter an e-mail address.';
-	} else if (input.validity.typeMismatch) {
+		input.errorSpan.textContent = input.errorText;
+	} else if (input.id.validity.typeMismatch) {
 		// If the field doesn't contain an email address,
 		// display the following error message.
-		error.textContent =
-			'Entered value needs to be an e-mail address.';
-	} else if (input.validity.tooShort) {
+		input.errorSpan.textContent = input.errorText;
+	} else if (input.id.validity.tooShort) {
 		// If the data is too short,
 		// display the following error message.
-		error.textContent = `Should be at least ${input.minLength} characters; you entered ${input.value.length}.`;
+		input.errorSpan.textContent = `Should be at least ${input.id.minLength} characters; you entered ${input.id.value.length}.`;
 	}
 
 	// Set the styling appropriately
-	error.className = 'error active';
+	input.errorSpan.className = 'error active';
 }
