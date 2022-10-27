@@ -32,6 +32,11 @@ input:focus:invalid {
   outline: none;
 }
 
+input:valid {
+  border-color: green;
+  background-color: lightgreen;
+}
+
 /* This is the style of our error messages */
 .error {
   width: 100%;

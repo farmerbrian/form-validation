@@ -59,12 +59,24 @@ inputError(password);
 inputError(password2);
 
 form.addEventListener('submit', (event) => {
+	event.preventDefault();
 	// if the email field is valid, we let the form submit
-	if (!email.validity.valid) {
-		// If it isn't, we display an appropriate error message
-		showError();
+	if (
+		!email.id.validity.valid ||
+		!country.id.validity.valid ||
+		!zip.id.validity.valid ||
+		!password.id.validity.valid ||
+		!(password.id.value == password2.id.value)
+	) {
 		// Then we prevent the form from being sent by canceling the event
-		event.preventDefault();
+		// event.preventDefault();
+		if (!(password.id.value == password2.id.value)) {
+			password2.errorSpan.className = 'error active';
+			password2.errorSpan.textContent = "Password doesn't match";
+		}
+		alert('Please fix the errors on the form');
+	} else {
+		alert('High-Five!!! Good Job!');
 	}
 });
 
